@@ -1,0 +1,59 @@
+*** SPICE deck for cell 3x8Decodet{sch} from library Project
+*** Created on Sun Jun 25, 2023 18:51:44
+*** Last revised on Thu Jul 06, 2023 22:56:30
+*** Written on Thu Jul 06, 2023 22:56:35 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Project__inverter FROM CELL inverter{sch}
+.SUBCKT Project__inverter in out
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 out in gnd gnd NMOS L=0.088U W=0.22U
+Mpmos@0 vdd in out vdd PMOS L=0.088U W=0.22U
+.ENDS Project__inverter
+
+*** SUBCIRCUIT Project__nand3in FROM CELL nand3in{sch}
+.SUBCKT Project__nand3in A B C out
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 out C net@14 gnd NMOS L=0.044U W=0.22U
+Mnmos@1 net@15 A gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@2 net@14 B net@15 gnd NMOS L=0.044U W=0.22U
+Mpmos@0 vdd A out vdd PMOS L=0.044U W=0.22U
+Mpmos@1 vdd B out vdd PMOS L=0.044U W=0.22U
+Mpmos@2 vdd C out vdd PMOS L=0.044U W=0.22U
+.ENDS Project__nand3in
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: 3x8Decodet{sch}
+Xinverter@0 A net@140 Project__inverter
+Xinverter@1 B net@167 Project__inverter
+Xinverter@2 C net@190 Project__inverter
+Xinverter@3 net@128 y0 Project__inverter
+Xinverter@4 net@127 y1 Project__inverter
+Xinverter@11 net@126 y2 Project__inverter
+Xinverter@12 net@129 y3 Project__inverter
+Xinverter@13 net@130 y4 Project__inverter
+Xinverter@14 net@131 y5 Project__inverter
+Xinverter@15 net@132 y6 Project__inverter
+Xinverter@16 net@41 y7 Project__inverter
+Xnand3in@0 net@140 net@167 net@190 net@128 Project__nand3in
+Xnand3in@8 net@140 net@167 C net@127 Project__nand3in
+Xnand3in@15 net@140 B net@190 net@126 Project__nand3in
+Xnand3in@16 net@140 B C net@129 Project__nand3in
+Xnand3in@17 A net@167 net@190 net@130 Project__nand3in
+Xnand3in@18 A net@167 C net@131 Project__nand3in
+Xnand3in@19 A B net@190 net@132 Project__nand3in
+Xnand3in@20 A B C net@41 Project__nand3in
+
+* Spice Code nodes in cell cell '3x8Decodet{sch}'
+vdd vdd 0 dc 1.3
+va A 0 pulse 1.3 0 1p 1p 1p 150n 300n
+vb B 0 pulse 1.3 0 1p 1p 1p 300n 600n
+vc C 0 pulse 1.3 0 1p 1p 1p 600n 1200n
+cload out 0 200fF
+.tran 2400n 
+.include C:\elec\22nm.txt
+.END

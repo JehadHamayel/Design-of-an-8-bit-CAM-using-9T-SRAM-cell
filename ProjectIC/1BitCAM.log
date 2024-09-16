@@ -1,0 +1,21 @@
+Circuit: *** SPICE deck for cell 1BitCAM{sch} from library Project
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Fri Jul 07 15:39:38 2023
+Total elapsed time: 0.179 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2756
+traniter = 2732
+tranpoints = 1189
+accept = 1188
+rejected = 1
+matrix size = 86
+fillins = 0
+solver = Normal
+Matrix Compiler1: 11.83 KB object code size  3.0/1.8/[0.9]
+Matrix Compiler2: off  [1.4]/1.8/1.5
+

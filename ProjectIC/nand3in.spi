@@ -1,0 +1,26 @@
+*** SPICE deck for cell nand3in{sch} from library Project
+*** Created on Sun Jun 25, 2023 18:42:42
+*** Last revised on Thu Jul 06, 2023 08:53:27
+*** Written on Thu Jul 06, 2023 08:53:30 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: nand3in{sch}
+Mnmos@0 out C net@14 gnd NMOS L=0.044U W=0.22U
+Mnmos@1 net@15 A gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@2 net@14 B net@15 gnd NMOS L=0.044U W=0.22U
+Mpmos@0 vdd A out vdd PMOS L=0.044U W=0.22U
+Mpmos@1 vdd B out vdd PMOS L=0.044U W=0.22U
+Mpmos@2 vdd C out vdd PMOS L=0.044U W=0.22U
+
+* Spice Code nodes in cell cell 'nand3in{sch}'
+vdd vdd 0 dc 1.3
+va A 0 pulse 1.3 0 1p 1p 1p 150n 300n
+vb B 0 pulse 1.3 0 1p 1p 1p 300n 600n
+vc C 0 pulse 1.3 0 1p 1p 1p 600n 1200n
+cload out 0 200fF
+.tran 2400n 
+.include C:\elec\22nm.txt
+.END

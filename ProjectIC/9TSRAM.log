@@ -1,0 +1,26 @@
+Circuit: *** SPICE deck for cell 9TSRAM{sch} from library Project
+
+Direct Newton iteration for .op point succeeded.
+Breakpoint in the past!
+
+tf=2.98378e-008 FROM 2.01622e-008 TO 5e-008
+tr=3.98488e-008 FROM 1.01512e-008 TO 5e-008
+
+
+Date: Sat Jul 08 22:37:24 2023
+Total elapsed time: 0.181 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 2357
+traniter = 2349
+tranpoints = 1102
+accept = 1101
+rejected = 1
+matrix size = 49
+fillins = 0
+solver = Normal
+Matrix Compiler1: 5.29 KB object code size  1.5/1.1/[0.4]
+Matrix Compiler2: 5.58 KB object code size  0.7/1.1/[0.5]
+

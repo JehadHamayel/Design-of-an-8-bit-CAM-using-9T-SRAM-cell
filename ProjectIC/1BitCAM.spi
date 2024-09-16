@@ -1,0 +1,46 @@
+*** SPICE deck for cell 1BitCAM{sch} from library Project
+*** Created on Sat Jun 24, 2023 15:53:54
+*** Last revised on Fri Jul 07, 2023 15:39:34
+*** Written on Fri Jul 07, 2023 15:39:38 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Project__9TSRAM FROM CELL 9TSRAM{sch}
+.SUBCKT Project__9TSRAM BL BLB Q QB RD vdd WL
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 QB Q gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@1 gnd QB Q gnd NMOS L=0.044U W=0.22U
+Mnmos@2 Q WL BL gnd NMOS L=0.044U W=0.22U
+Mnmos@3 BLB WL QB gnd NMOS L=0.044U W=0.22U
+Mnmos@4 BLB Q net@52 gnd NMOS L=0.044U W=0.22U
+Mnmos@5 net@52 QB BL gnd NMOS L=0.044U W=0.22U
+Mnmos@6 net@52 RD gnd gnd NMOS L=0.044U W=0.22U
+Mpmos@0 vdd Q QB vdd PMOS L=0.044U W=0.22U
+Mpmos@1 Q QB vdd vdd PMOS L=0.044U W=0.22U
+.ENDS Project__9TSRAM
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: 1BitCAM{sch}
+Mnmos@0 net@25 Cam_data gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@1 net@55 net@25 gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@2 out net@46 net@25 gnd NMOS L=0.044U W=0.22U
+Mnmos@3 out net@116 net@55 gnd NMOS L=0.044U W=0.22U
+Mpmos@0 vdd Cam_data net@25 vdd PMOS L=0.044U W=0.22U
+Mpmos@1 vdd net@25 net@55 vdd PMOS L=0.044U W=0.22U
+Mpmos@2 net@25 net@116 out vdd PMOS L=0.044U W=0.22U
+Mpmos@3 net@55 net@46 out vdd PMOS L=0.044U W=0.22U
+X_9TSRAM@1 BL BLB net@116 net@46 RD vdd WL Project__9TSRAM
+
+* Spice Code nodes in cell cell '1BitCAM{sch}'
+vdd vdd 0 dc 2.5
+vblb BLB 0 pwl 0n 0 10n 0 10.001n 2.5 20n 2.5 20.001n 0 30n 0 30.001n 2.5 40n 2.5 40.001n 0 50n 0 50.001nn 2.5 60n 2.5 60.001n 0 70n 0 70.001n 2.5 80n 2.5 80.001n 0 90n 0 90.001n 2.5 100n 2.5
+vbl BL 0 pwl 0n 2.5 10n 2.5 10.001n 0 20n 0 20.001n 2.5 30n 2.5 30.001n 0 40n 0 40.001n 2.5 50n 2.5 50.001nn 0 60n 0 60.001n 2.5 70n 2.5 70.001n 0 80n 0 80.001n 2.5 90n 2.5 90.001n 0 100n 0
+vrd RD 0 pwl 0n 0 30n 0 30.001n 2.5 40n 2.5 40.001nn 0 60n 0 60.001n 2.5 100n 2.5
+vwl WL 0 pwl 0n 2.5 20n 2.5 20.001n 0 40n 0 40.001nn 2.5 60n 2.5 60.001n 0 100n 0
+vcam Cam_data 0 pwl 0n 2.5  100n 2.5
+cload out 0 200fF
+.tran 100n 
+.include C:\elec\22nm.txt
+.END

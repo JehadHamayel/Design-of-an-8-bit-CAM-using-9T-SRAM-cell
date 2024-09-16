@@ -1,0 +1,32 @@
+*** SPICE deck for cell 9TSRAM{sch} from library Project
+*** Created on Sat Jun 24, 2023 12:24:07
+*** Last revised on Sat Jul 08, 2023 22:37:20
+*** Written on Sat Jul 08, 2023 22:37:23 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: 9TSRAM{sch}
+Mnmos@0 QB Q gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@1 gnd QB Q gnd NMOS L=0.044U W=0.22U
+Mnmos@2 Q WL BL gnd NMOS L=0.044U W=0.22U
+Mnmos@3 BLB WL QB gnd NMOS L=0.044U W=0.22U
+Mnmos@4 BLB Q net@52 gnd NMOS L=0.044U W=0.22U
+Mnmos@5 net@52 QB BL gnd NMOS L=0.044U W=0.22U
+Mnmos@6 net@52 RD gnd gnd NMOS L=0.044U W=0.22U
+Mpmos@0 vdd Q QB vdd PMOS L=0.044U W=0.22U
+Mpmos@1 Q QB vdd vdd PMOS L=0.044U W=0.22U
+
+* Spice Code nodes in cell cell '9TSRAM{sch}'
+vdd vdd 0 dc 2.5
+vbl BL 0 pwl 0n 0 10n 0 10.001n 2.5 20n 2.5 20.001n 0 30n 0 30.001n 2.5 40n 2.5 40.001n 0 50n 0
+vblb BLB 0 pwl 0n 2.5 10n 2.5 10.001n 0 20n 0 20.001n 2.5 30n 2.5 30.001n 0 40n 0 40.001n 2.5 50n 2.5
+vrd RD 0 pwl 50n 0
+vwl WL 0 pwl 0n 2.5 30n 2.5 30.001n 0 50n 0
+.measure tran tf trig v(Q) val=2.0 fall=1 td=20ns trag v(Q) val=0.5 fall=1
+.measure tran tr trig v(Q) val=0.5 rais=1 td=10ns trag v(Q) val=2.0 rais=1
+cload Q 0 200fF
+.tran 50n 
+.include C:\elec\22nm.txt
+.END

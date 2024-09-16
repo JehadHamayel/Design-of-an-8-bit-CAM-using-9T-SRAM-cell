@@ -1,0 +1,67 @@
+Circuit: *** SPICE deck for cell 8BitCam{sch} from library Project
+
+Vc7: Removing PWL point (2e-008,0)
+Vc6: Removing PWL point (2e-008,0)
+Vc5: Removing PWL point (2e-008,0)
+Vc4: Removing PWL point (2e-008,0)
+Vc3: Removing PWL point (2e-008,0)
+Vc2: Removing PWL point (2e-008,0)
+Vc1: Removing PWL point (2e-008,0)
+Vc0: Removing PWL point (2e-008,1)
+Vc0: Removing PWL point (3.3e-007,0)
+Vrd: Removing PWL point (2e-008,0)
+Vd7: Removing PWL point (2e-008,0)
+Vd6: Removing PWL point (2e-008,0)
+Vd5: Removing PWL point (2e-008,0)
+Vd4: Removing PWL point (2e-008,0)
+Vd3: Removing PWL point (2e-008,0)
+Vd2: Removing PWL point (2e-008,0)
+Vd1: Removing PWL point (2e-008,0)
+Vd0: Removing PWL point (2e-008,1)
+Vd0: Removing PWL point (2.1e-007,0)
+Vc: Removing PWL point (2e-008,0)
+Vb: Removing PWL point (2e-008,0)
+Va: Removing PWL point (2e-008,1)
+Direct Newton iteration failed to find .op point.  (Use ".option noopiter" to skip.)
+Starting Gmin stepping
+Gmin = 10
+Gmin = 1.07374
+Gmin = 0.115292
+Gmin = 0.0123794
+Gmin = 0.00132923
+Gmin = 0.000142725
+Gmin = 1.5325e-005
+Gmin = 1.6455e-006
+Gmin = 1.76685e-007
+Gmin = 1.89714e-008
+Gmin = 2.03704e-009
+Gmin = 2.18725e-010
+Gmin = 2.34854e-011
+Gmin = 2.52173e-012
+Gmin = 2.70769e-013
+Gmin = 0
+Gmin stepping succeeded in finding the operating point.
+
+
+tf=1.98063e-007 FROM 2.01937e-007 TO 4e-007
+tr=1.62542e-007 FROM 2.37458e-007 TO 4e-007
+
+
+Date: Sun Jul 09 00:00:19 2023
+Total elapsed time: 47.506 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 4223
+traniter = 3667
+tranpoints = 1250
+accept = 1198
+rejected = 52
+matrix size = 5813
+fillins = 1433
+solver = Normal
+Thread vector: 1747.4/652.0[8] 565.8/232.3[8] 321.4/178.8[8] 64.5/42.4[8]  2592/500
+Matrix Compiler1: 1.17 MB object code size  1088.3/452.3/[312.4]
+Matrix Compiler2: 793.94 KB object code size  451.3/399.8/[143.7]
+

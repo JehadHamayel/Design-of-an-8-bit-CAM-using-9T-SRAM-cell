@@ -1,0 +1,218 @@
+*** SPICE deck for cell 8BitCam{sch} from library Project
+*** Created on Mon Jul 03, 2023 19:20:09
+*** Last revised on Sat Jul 08, 2023 23:25:51
+*** Written on Sat Jul 08, 2023 23:59:31 by Electric VLSI Design System, version 9.07
+*** Layout tech: mocmos, foundry MOSIS
+*** UC SPICE *** , MIN_RESIST 4.0, MIN_CAPAC 0.1FF
+
+*** SUBCIRCUIT Project__9TSRAM FROM CELL 9TSRAM{sch}
+.SUBCKT Project__9TSRAM BL BLB Q QB RD vdd WL
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 QB Q gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@1 gnd QB Q gnd NMOS L=0.044U W=0.22U
+Mnmos@2 Q WL BL gnd NMOS L=0.044U W=0.22U
+Mnmos@3 BLB WL QB gnd NMOS L=0.044U W=0.22U
+Mnmos@4 BLB Q net@52 gnd NMOS L=0.044U W=0.22U
+Mnmos@5 net@52 QB BL gnd NMOS L=0.044U W=0.22U
+Mnmos@6 net@52 RD gnd gnd NMOS L=0.044U W=0.22U
+Mpmos@0 vdd Q QB vdd PMOS L=0.044U W=0.22U
+Mpmos@1 Q QB vdd vdd PMOS L=0.044U W=0.22U
+.ENDS Project__9TSRAM
+
+*** SUBCIRCUIT Project__1BitCAM FROM CELL 1BitCAM{sch}
+.SUBCKT Project__1BitCAM BL BLB Cam_data out RD WL
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 net@25 Cam_data gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@1 net@55 net@25 gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@2 out net@46 net@25 gnd NMOS L=0.044U W=0.22U
+Mnmos@3 out net@116 net@55 gnd NMOS L=0.044U W=0.22U
+Mpmos@0 vdd Cam_data net@25 vdd PMOS L=0.044U W=0.22U
+Mpmos@1 vdd net@25 net@55 vdd PMOS L=0.044U W=0.22U
+Mpmos@2 net@25 net@116 out vdd PMOS L=0.044U W=0.22U
+Mpmos@3 net@55 net@46 out vdd PMOS L=0.044U W=0.22U
+X_9TSRAM@1 BL BLB net@116 net@46 RD vdd WL Project__9TSRAM
+.ENDS Project__1BitCAM
+
+*** SUBCIRCUIT Project__inverter FROM CELL inverter{sch}
+.SUBCKT Project__inverter in out
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 out in gnd gnd NMOS L=0.088U W=0.22U
+Mpmos@0 vdd in out vdd PMOS L=0.088U W=0.22U
+.ENDS Project__inverter
+
+*** SUBCIRCUIT Project__nand3in FROM CELL nand3in{sch}
+.SUBCKT Project__nand3in A B C out
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@0 out C net@14 gnd NMOS L=0.044U W=0.22U
+Mnmos@1 net@15 A gnd gnd NMOS L=0.044U W=0.22U
+Mnmos@2 net@14 B net@15 gnd NMOS L=0.044U W=0.22U
+Mpmos@0 vdd A out vdd PMOS L=0.044U W=0.22U
+Mpmos@1 vdd B out vdd PMOS L=0.044U W=0.22U
+Mpmos@2 vdd C out vdd PMOS L=0.044U W=0.22U
+.ENDS Project__nand3in
+
+*** SUBCIRCUIT Project__3x8Decodet FROM CELL 3x8Decodet{sch}
+.SUBCKT Project__3x8Decodet A B C y0 y1 y2 y3 y4 y5 y6 y7
+** GLOBAL gnd
+** GLOBAL vdd
+Xinverter@0 A net@140 Project__inverter
+Xinverter@1 B net@167 Project__inverter
+Xinverter@2 C net@190 Project__inverter
+Xinverter@3 net@128 y0 Project__inverter
+Xinverter@4 net@127 y1 Project__inverter
+Xinverter@11 net@126 y2 Project__inverter
+Xinverter@12 net@129 y3 Project__inverter
+Xinverter@13 net@130 y4 Project__inverter
+Xinverter@14 net@131 y5 Project__inverter
+Xinverter@15 net@132 y6 Project__inverter
+Xinverter@16 net@41 y7 Project__inverter
+Xnand3in@0 net@140 net@167 net@190 net@128 Project__nand3in
+Xnand3in@8 net@140 net@167 C net@127 Project__nand3in
+Xnand3in@15 net@140 B net@190 net@126 Project__nand3in
+Xnand3in@16 net@140 B C net@129 Project__nand3in
+Xnand3in@17 A net@167 net@190 net@130 Project__nand3in
+Xnand3in@18 A net@167 C net@131 Project__nand3in
+Xnand3in@19 A B net@190 net@132 Project__nand3in
+Xnand3in@20 A B C net@41 Project__nand3in
+.ENDS Project__3x8Decodet
+
+*** SUBCIRCUIT Project__nand FROM CELL nand{sch}
+.SUBCKT Project__nand a b c d e f g h out
+** GLOBAL gnd
+** GLOBAL vdd
+Mnmos@8 out h net@79 gnd NMOS L=0.044U W=0.22U
+Mnmos@9 net@79 g net@80 gnd NMOS L=0.044U W=0.22U
+Mnmos@10 net@80 f net@81 gnd NMOS L=0.044U W=0.22U
+Mnmos@11 net@81 e net@82 gnd NMOS L=0.044U W=0.22U
+Mnmos@12 net@82 d net@83 gnd NMOS L=0.044U W=0.22U
+Mnmos@13 net@83 c net@84 gnd NMOS L=0.044U W=0.22U
+Mnmos@14 net@84 b net@86 gnd NMOS L=0.044U W=0.22U
+Mnmos@15 net@86 a gnd gnd NMOS L=0.044U W=0.22U
+Mpmos@0 vdd h out vdd PMOS L=0.044U W=0.22U
+Mpmos@1 vdd g out vdd PMOS L=0.044U W=0.22U
+Mpmos@2 vdd f out vdd PMOS L=0.044U W=0.22U
+Mpmos@3 vdd e out vdd PMOS L=0.044U W=0.22U
+Mpmos@4 vdd d out vdd PMOS L=0.044U W=0.22U
+Mpmos@5 vdd c out vdd PMOS L=0.044U W=0.22U
+Mpmos@6 vdd b out vdd PMOS L=0.044U W=0.22U
+Mpmos@7 vdd a out vdd PMOS L=0.044U W=0.22U
+.ENDS Project__nand
+
+.global gnd vdd
+
+*** TOP LEVEL CELL: 8BitCam{sch}
+X_1BitCAM@0 Data0 net@966 cam0 net@339 RD net@0 Project__1BitCAM
+X_1BitCAM@1 Data1 net@990 cam1 net@337 RD net@0 Project__1BitCAM
+X_1BitCAM@2 Data2 net@1014 cam2 net@331 RD net@0 Project__1BitCAM
+X_1BitCAM@3 Data3 net@1037 cam3 net@323 RD net@0 Project__1BitCAM
+X_1BitCAM@4 Data4 net@1060 cam4 net@318 RD net@0 Project__1BitCAM
+X_1BitCAM@5 Data5 net@1154 cam5 net@313 RD net@0 Project__1BitCAM
+X_1BitCAM@6 Data6 net@1103 cam6 net@309 RD net@0 Project__1BitCAM
+X_1BitCAM@7 Data7 net@1126 cam7 net@308 RD net@0 Project__1BitCAM
+X_1BitCAM@8 Data0 net@966 cam0 net@396 RD net@27 Project__1BitCAM
+X_1BitCAM@9 Data1 net@990 cam1 net@394 RD net@27 Project__1BitCAM
+X_1BitCAM@10 Data2 net@1014 cam2 net@388 RD net@27 Project__1BitCAM
+X_1BitCAM@11 Data3 net@1037 cam3 net@382 RD net@27 Project__1BitCAM
+X_1BitCAM@12 Data4 net@1060 cam4 net@376 RD net@27 Project__1BitCAM
+X_1BitCAM@13 Data5 net@1154 cam5 net@369 RD net@27 Project__1BitCAM
+X_1BitCAM@14 Data6 net@1103 cam6 net@364 RD net@27 Project__1BitCAM
+X_1BitCAM@15 Data7 net@1126 cam7 net@363 RD net@27 Project__1BitCAM
+X_1BitCAM@16 Data0 net@966 cam0 net@437 RD net@56 Project__1BitCAM
+X_1BitCAM@17 Data1 net@990 cam1 net@434 RD net@56 Project__1BitCAM
+X_1BitCAM@18 Data2 net@1014 cam2 net@426 RD net@56 Project__1BitCAM
+X_1BitCAM@19 Data3 net@1037 cam3 net@421 RD net@56 Project__1BitCAM
+X_1BitCAM@20 Data4 net@1060 cam4 net@411 RD net@56 Project__1BitCAM
+X_1BitCAM@21 Data5 net@1154 cam5 net@406 RD net@56 Project__1BitCAM
+X_1BitCAM@22 Data6 net@1103 cam6 net@400 RD net@56 Project__1BitCAM
+X_1BitCAM@23 Data7 net@1126 cam7 net@357 RD net@56 Project__1BitCAM
+X_1BitCAM@24 Data0 net@966 cam0 net@469 RD net@83 Project__1BitCAM
+X_1BitCAM@25 Data1 net@990 cam1 net@466 RD net@83 Project__1BitCAM
+X_1BitCAM@26 Data2 net@1014 cam2 net@462 RD net@83 Project__1BitCAM
+X_1BitCAM@27 Data3 net@1037 cam3 net@457 RD net@83 Project__1BitCAM
+X_1BitCAM@28 Data4 net@1060 cam4 net@452 RD net@83 Project__1BitCAM
+X_1BitCAM@29 Data5 net@1154 cam5 net@447 RD net@83 Project__1BitCAM
+X_1BitCAM@30 Data6 net@1103 cam6 net@442 RD net@83 Project__1BitCAM
+X_1BitCAM@31 Data7 net@1126 cam7 net@358 RD net@83 Project__1BitCAM
+X_1BitCAM@32 Data0 net@966 cam0 net@507 RD net@108 Project__1BitCAM
+X_1BitCAM@33 Data1 net@990 cam1 net@504 RD net@108 Project__1BitCAM
+X_1BitCAM@34 Data2 net@1014 cam2 net@501 RD net@108 Project__1BitCAM
+X_1BitCAM@35 Data3 net@1037 cam3 net@494 RD net@108 Project__1BitCAM
+X_1BitCAM@36 Data4 net@1060 cam4 net@489 RD net@108 Project__1BitCAM
+X_1BitCAM@37 Data5 net@1154 cam5 net@483 RD net@108 Project__1BitCAM
+X_1BitCAM@38 Data6 net@1103 cam6 net@478 RD net@108 Project__1BitCAM
+X_1BitCAM@39 Data7 net@1126 cam7 net@360 RD net@108 Project__1BitCAM
+X_1BitCAM@40 Data0 net@966 cam0 net@540 RD net@135 Project__1BitCAM
+X_1BitCAM@41 Data1 net@990 cam1 net@534 RD net@135 Project__1BitCAM
+X_1BitCAM@42 Data2 net@1014 cam2 net@531 RD net@135 Project__1BitCAM
+X_1BitCAM@43 Data3 net@1037 cam3 net@528 RD net@135 Project__1BitCAM
+X_1BitCAM@44 Data4 net@1060 cam4 net@523 RD net@135 Project__1BitCAM
+X_1BitCAM@45 Data5 net@1154 cam5 net@518 RD net@135 Project__1BitCAM
+X_1BitCAM@46 Data6 net@1103 cam6 net@514 RD net@135 Project__1BitCAM
+X_1BitCAM@47 Data7 net@1126 cam7 net@359 RD net@135 Project__1BitCAM
+X_1BitCAM@48 Data0 net@966 cam0 net@572 RD net@140 Project__1BitCAM
+X_1BitCAM@49 Data1 net@990 cam1 net@567 RD net@140 Project__1BitCAM
+X_1BitCAM@50 Data2 net@1014 cam2 net@563 RD net@140 Project__1BitCAM
+X_1BitCAM@51 Data3 net@1037 cam3 net@558 RD net@140 Project__1BitCAM
+X_1BitCAM@52 Data4 net@1060 cam4 net@553 RD net@140 Project__1BitCAM
+X_1BitCAM@53 Data5 net@1154 cam5 net@548 RD net@140 Project__1BitCAM
+X_1BitCAM@54 Data6 net@1103 cam6 net@544 RD net@140 Project__1BitCAM
+X_1BitCAM@55 Data7 net@1126 cam7 net@361 RD net@140 Project__1BitCAM
+X_1BitCAM@56 Data0 net@966 cam0 net@602 RD net@165 Project__1BitCAM
+X_1BitCAM@57 Data1 net@990 cam1 net@600 RD net@165 Project__1BitCAM
+X_1BitCAM@58 Data2 net@1014 cam2 net@598 RD net@165 Project__1BitCAM
+X_1BitCAM@59 Data3 net@1037 cam3 net@590 RD net@165 Project__1BitCAM
+X_1BitCAM@60 Data4 net@1060 cam4 net@585 RD net@165 Project__1BitCAM
+X_1BitCAM@61 Data5 net@1154 cam5 net@581 RD net@165 Project__1BitCAM
+X_1BitCAM@62 Data6 net@1103 cam6 net@577 RD net@165 Project__1BitCAM
+X_1BitCAM@63 Data7 net@1126 cam7 net@362 RD net@165 Project__1BitCAM
+X_3x8Decod@0 A B C net@0 net@27 net@56 net@83 net@108 net@135 net@140 net@165 Project__3x8Decodet
+Xinverter@0 Data0 net@966 Project__inverter
+Xinverter@1 Data1 net@990 Project__inverter
+Xinverter@2 Data2 net@1014 Project__inverter
+Xinverter@3 Data3 net@1037 Project__inverter
+Xinverter@4 Data4 net@1060 Project__inverter
+Xinverter@5 Data5 net@1154 Project__inverter
+Xinverter@6 Data6 net@1103 Project__inverter
+Xinverter@7 Data7 net@1126 Project__inverter
+Xnand@0 net@339 net@337 net@331 net@323 net@318 net@313 net@309 net@308 net@607 Project__nand
+Xnand@1 net@396 net@394 net@388 net@382 net@376 net@369 net@364 net@363 net@608 Project__nand
+Xnand@2 net@437 net@434 net@426 net@421 net@411 net@406 net@400 net@357 net@611 Project__nand
+Xnand@3 net@469 net@466 net@462 net@457 net@452 net@447 net@442 net@358 net@615 Project__nand
+Xnand@4 net@507 net@504 net@501 net@494 net@489 net@483 net@478 net@360 net@618 Project__nand
+Xnand@5 net@540 net@534 net@531 net@528 net@523 net@518 net@514 net@359 net@622 Project__nand
+Xnand@6 net@572 net@567 net@563 net@558 net@553 net@548 net@544 net@361 net@626 Project__nand
+Xnand@7 net@602 net@600 net@598 net@590 net@585 net@581 net@577 net@362 net@630 Project__nand
+Xnand@8 net@607 net@608 net@611 net@615 net@618 net@622 net@626 net@630 output Project__nand
+
+* Spice Code nodes in cell cell '8BitCam{sch}'
+vdd vdd 0 DC 1
+vA A 0 pwl 0n 1 20n 1 50n 1 60n 1 90n 1 100n 1 130n 1 140n 1 170n 1 180n 1 190n 1 200n 1 210n 1 250n 1 260n 1 290n 1 300n 1 330n 1 340n 1 370n 1 380n 1 390n 1 
+vB B 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 190n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vC C 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 190n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vD0 Data0 0 pwl 0n 1 20n 1 50n 1 60n 1 90n 1 100n 1 130n 1 140n 1 170n 1 180n 1 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vD1 Data1 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vD2 Data2 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vD3 Data3 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vD4 Data4 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vD5 Data5 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vD6 Data6 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vD7 Data7 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vRD RD 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vc0 cam0 0 pwl 0n 1 20n 1 50n 1 60n 1 90n 1 100n 1 130n 1 140n 1 170n 1 180n 1 200n 1 210n 1 250n 1 260n 1 290n 1 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vc1 cam1 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vc2 cam2 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vc3 cam3 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vc4 cam4 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vc5 cam5 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vc6 cam6 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+vc7 cam7 0 pwl 0n 0 20n 0 50n 0 60n 0 90n 0 100n 0 130n 0 140n 0 170n 0 180n 0 200n 0 210n 0 250n 0 260n 0 290n 0 300n 0 330n 0 340n 0 370n 0 380n 0 390n 0
+.measure tran tf trig v(output) val=0.9 fall=1 td=180ns trag v(output) val=0.1 fall=1
+.measure tran tr trig v(output) val=0.1 rais=1 td=290ns trag v(output) val=0.9 rais=1
+cload output 0 250fF
+.tran 400n 
+.include C:\elec\22nm.txt
+.END

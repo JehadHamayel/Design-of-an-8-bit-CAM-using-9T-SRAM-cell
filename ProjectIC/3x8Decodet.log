@@ -1,0 +1,25 @@
+Circuit: *** SPICE deck for cell 3x8Decodet{sch} from library Project
+
+WARNING: Node OUT is floating.
+
+WARNING: Less than two connections to node OUT.  This node is used by CLOAD.
+Direct Newton iteration for .op point succeeded.
+
+Date: Thu Jul 06 22:56:37 2023
+Total elapsed time: 1.155 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 7076
+traniter = 7031
+tranpoints = 2259
+accept = 2036
+rejected = 223
+matrix size = 324
+fillins = 14
+solver = Normal
+Thread vector: 286.1/199.8[7] 53.6/16.7[7] 307.1/85.7[7] 2.3/8.7[1]  2592/500
+Matrix Compiler1: 45.90 KB object code size  21.3/13.6/[5.4]
+Matrix Compiler2: 40.98 KB object code size  12.3/47.4/[6.1]
+

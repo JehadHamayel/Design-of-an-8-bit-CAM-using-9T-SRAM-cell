@@ -1,0 +1,21 @@
+Circuit: *** SPICE deck for cell nand3in{sch} from library Project
+
+Direct Newton iteration for .op point succeeded.
+
+Date: Thu Jul 06 08:53:30 2023
+Total elapsed time: 0.110 seconds.
+
+tnom = 27
+temp = 27
+method = modified trap
+totiter = 4951
+traniter = 4937
+tranpoints = 2139
+accept = 1925
+rejected = 214
+matrix size = 35
+fillins = 0
+solver = Normal
+Matrix Compiler1: 3.51 KB object code size  0.9/0.5/[0.2]
+Matrix Compiler2: 4.04 KB object code size  0.4/0.6/[0.3]
+
